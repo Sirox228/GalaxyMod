@@ -33,7 +33,7 @@ class Hitbox extends FlxSpriteGroup
     public var buttonUp:FlxButton;
     public var buttonRight:FlxButton;
     
-    public function new(mode:Modes)
+    public function new()
     {
         super();
 
