@@ -47,8 +47,7 @@ jobs:
           haxelib install hscript
           haxelib install flixel-addons
           haxelib install hxCodec
-          haxelib git extension-androidtools https://github.com/majigsaw77/extension-androidtools.git
-          haxelib git linc_luajit https://github.com/MAJigsaw77/linc_luajit.git
+          haxelib git extension-androidtools https://github.com/majigsaw77/extension-androidtools.git        
           haxelib list
       - name: Create Version Tag
         run: echo "${{github.run_id}}" > VERSION
