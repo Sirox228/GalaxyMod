@@ -5,6 +5,7 @@ import sys.FileSystem;
 import android.Hardware;
 import android.Permissions;
 import android.os.Environment;
+import android.widget.Toast
 #end
 import flash.system.System;
 import flixel.FlxG;
@@ -111,7 +112,7 @@ class Generic {
 			}
 			#if android
 			catch (e:Dynamic)
-			Hardware.toast("Error!\nClouldn't save the crash dump because:\n" + e, ToastType.LENGTH_LONG);
+			Toast.makeText("Error!\nClouldn't save the crash dump because:\n" + e, ToastType.LENGTH_LONG);
 			#end
 
 			Sys.println(errMsg);
