@@ -215,6 +215,10 @@ class MainMenuState extends MusicBeatState
 		optioned = false;
 
 		super.create();
+		
+		#if android 
+		addVirtualPad(NONE, B);
+		#end
 	}
 
 	var selectedSomethin:Bool = false;
