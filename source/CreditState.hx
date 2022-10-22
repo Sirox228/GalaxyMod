@@ -147,6 +147,10 @@ class CreditState extends MusicBeatState
 		changeSelection(0);
 
 		super.create();
+		
+		#if android 
+		addVirtualPad(NONE, B);
+		#end
 	}
 
 	override function update(elapsed:Float)
