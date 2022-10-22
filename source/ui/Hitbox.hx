@@ -32,7 +32,6 @@ class Hitbox extends FlxSpriteGroup
     public var buttonDown:FlxButton;
     public var buttonUp:FlxButton;
     public var buttonRight:FlxButton;
-    public var buttonDodge:FlxButton;
     
     public function new(mode:Modes)
     {
@@ -49,19 +48,12 @@ class Hitbox extends FlxSpriteGroup
         //add graphic
         hitbox = new FlxSpriteGroup();
         hitbox.scrollFactor.set();
-        switch (mode) {
-        	case DEFAULT:
+        switch (mode) 
                 hitbox.add(add(buttonLeft = createhitbox(0, 0xFF00FF)));
                 hitbox.add(add(buttonDown = createhitbox(sizex, 0x00FFFF)));
                 hitbox.add(add(buttonUp = createhitbox(sizex * 2, 0x00FF00)));
                 hitbox.add(add(buttonRight = createhitbox(sizex * 3, 0xFF0000)));
-            case DODGE:
-                hitbox.add(add(buttonLeft = createhitbox(0, 0xFF00FF, offsetSec, sizex, 540)));
-                hitbox.add(add(buttonDown = createhitbox(sizex, 0x00FFFF, offsetSec, sizex, 540)));
-                hitbox.add(add(buttonUp = createhitbox(sizex * 2, 0x00FF00, offsetSec, sizex, 540)));
-                hitbox.add(add(buttonRight = createhitbox(sizex * 3, 0xFF0000, offsetSec, sizex, 540)));
-                hitbox.add(add(buttonDodge = createhitbox(0, 0x636363, offsetFir, 1280, 180)));
-       }
+  
     }
     
     private function createHintGraphic(Width:Int, Height:Int, Color:Int = 0xFFFFFF):BitmapData
@@ -130,9 +122,4 @@ class Hitbox extends FlxSpriteGroup
             buttonUp = null;
             buttonRight = null;
         }
-}
-
-enum Modes {
-	DEFAULT;
-	DODGE;
 }
