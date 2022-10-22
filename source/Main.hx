@@ -38,6 +38,8 @@ class Main extends Sprite
 	{
 		super();
 
+                Generic.initCrashHandler()
+
 		if (stage != null)
 		{
 			init();
@@ -72,6 +74,8 @@ class Main extends Sprite
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
 
+                Generic.mode = INTERNAL;
+
 		#if !debug
 		initialState = TitleState;
 		#end
@@ -85,11 +89,11 @@ class Main extends Sprite
 
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
-		#if !mobile
+		
 		fps = new FPSCounter(10, 3, 0xFFFFFF);
 		fps.visible = !FlxG.save.data.showFPS;
 		addChild(fps);
-		#end
+		
 
 		FlxG.autoPause = false;
 	}
