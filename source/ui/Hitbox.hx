@@ -48,11 +48,11 @@ class Hitbox extends FlxSpriteGroup
         //add graphic
         hitbox = new FlxSpriteGroup();
         hitbox.scrollFactor.set();
-        switch (mode) 
-                hitbox.add(add(buttonLeft = createhitbox(0, 0xFF00FF)));
-                hitbox.add(add(buttonDown = createhitbox(sizex, 0x00FFFF)));
-                hitbox.add(add(buttonUp = createhitbox(sizex * 2, 0x00FF00)));
-                hitbox.add(add(buttonRight = createhitbox(sizex * 3, 0xFF0000)));
+		
+        hitbox.add(add(buttonLeft = createhitbox(0, 0xFF00FF)));
+        hitbox.add(add(buttonDown = createhitbox(sizex, 0x00FFFF)));
+        hitbox.add(add(buttonUp = createhitbox(sizex * 2, 0x00FF00)));
+        hitbox.add(add(buttonRight = createhitbox(sizex * 3, 0xFF0000)));
   
     }
     
