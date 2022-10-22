@@ -2375,12 +2375,12 @@ class PlayState extends MusicBeatState
 			{
 				if (storyWeek != 0)
 				{
-					if (!FlxG.save.data.trophies.contains(APIStuff.comWeek[storyWeek]))
-						FlxG.save.data.trophies.push(APIStuff.comWeek[storyWeek]);
+					//if (!FlxG.save.data.trophies.contains(APIStuff.comWeek[storyWeek]))
+						//FlxG.save.data.trophies.push(APIStuff.comWeek[storyWeek]);
 				}
 			}
 		}
-		if (misses == 0 && bads == 0 && shits == 0 && wrongs == 0 && APIStuff.fcs.exists(SONG.song) && storyDifficulty == 2)
+		/*if (misses == 0 && bads == 0 && shits == 0 && wrongs == 0 && APIStuff.fcs.exists(SONG.song) && storyDifficulty == 2)
 		{
 			if (!FlxG.save.data.trophies.contains(APIStuff.fcs.get(SONG.song)))
 				FlxG.save.data.trophies.push(APIStuff.fcs.get(SONG.song));
@@ -2389,7 +2389,7 @@ class PlayState extends MusicBeatState
 		{
 			if (!FlxG.save.data.trophies.contains(APIStuff.comSong.get(SONG.song + "-" + storyDifficulty)))
 				FlxG.save.data.trophies.push(APIStuff.comSong.get(SONG.song + "-" + storyDifficulty));
-		}
+		} */
 
 		trace(FlxG.save.data.trophies);
 		return;

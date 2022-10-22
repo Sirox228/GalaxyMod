@@ -2,7 +2,7 @@ package;
 
 import flixel.FlxG;
 import openfl.events.Event;
-import src.VideoHandler;
+import VideoHandler;
 
 class BossVideo extends VideoHandler
 {

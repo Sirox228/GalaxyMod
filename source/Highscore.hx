@@ -41,7 +41,7 @@ class Highscore
 		else
 			setCombo(daSong, com);
 
-		#if PRELOAD_ALL
+		#if desktop
 		if (APIStuff.boards.exists(song) && FlxGameJolt.initialized)
 		{
 			var task = true;

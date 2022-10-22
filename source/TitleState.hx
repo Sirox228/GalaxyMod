@@ -87,12 +87,13 @@ class TitleState extends MusicBeatState
 			FlxG.save.data.weekPassed = StoryMenuState.weekPassed;
 		}
 
-		FlxGameJolt.init(APIStuff.gameID, APIStuff.privateKey, FlxG.save.data.userName != null, FlxG.save.data.userName, FlxG.save.data.userToken,
-			function(what:Bool)
+		//FlxGameJolt.init(APIStuff.gameID, APIStuff.privateKey, FlxG.save.data.userName != null, FlxG.save.data.userName, FlxG.save.data.userToken,
+			
+			/*function(what:Bool)
 			{
 				if (what)
 					welcome = new Welcome();
-			});
+			});*/
 
 		#if FREEPLAY
 		FlxG.switchState(new FreeplayState());
