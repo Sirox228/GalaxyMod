@@ -5,7 +5,7 @@ import sys.FileSystem;
 import android.Hardware;
 import android.Permissions;
 import android.os.Environment;
-import android.widget.Toast
+import android.widget.Toast;
 #end
 import flash.system.System;
 import flixel.FlxG;
