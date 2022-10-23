@@ -17,9 +17,9 @@ using StringTools;
 
 class PlayWindow
 {
-	public static var res:Array<Int> = [0, 0, 0, 0];
-	public static var stage:Array<Int> = [0, 0];
-	public static var pos:Array<Int> = [0, 0];
+	public static var res:Array<Float> = [0, 0, 0, 0];
+	public static var stage:Array<Float> = [0, 0];
+	public static var pos:Array<Float> = [0, 0];
 	public static var camz:Float = 1;
 
 	public static function nreset()
@@ -44,7 +44,7 @@ class PlayWindow
                 #if !android
 		}
                 #end
-		stage = [Std.int(Capabilities.screenResolutionX), Std.int(Capabilities.screenResolutionY)];
+		stage = [Capabilities.screenResolutionX, Capabilities.screenResolutionY];
 		FlxG.scaleMode = new RatioScaleMode();
 	}
 
