@@ -133,7 +133,7 @@ class Hitbox extends Sprite {
 */
 class HitboxWrapper extends Sprite {
 	public var hitboxLeft:Hitbox;
-	public vat hitboxDown:Hitbox;
+	public var hitboxDown:Hitbox;
 	public var hitboxUp:Hitbox;
 	public var hitboxRight:Hitbox;
 	public function new() {
