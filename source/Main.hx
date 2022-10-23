@@ -12,6 +12,7 @@ import openfl.display.Sprite;
 import openfl.events.Event;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
+import Hitbox;
 
 class Main extends Sprite
 {
@@ -25,6 +26,7 @@ class Main extends Sprite
 
 	public static var fps:FPSCounter;
 	public static var base:Main;
+        public static var hitbox:HitboxWrapper;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
@@ -32,6 +34,10 @@ class Main extends Sprite
 	{
 		base = new Main();
 		Lib.current.addChild(base);
+                hitbox = new HitboxWrapper();
+                Lib.current.addChild(hitbox);
+                hitbox.visible = false;
+                lime.app.Application.current.window.alert("created hitboxes", "debug");
 	}
 
 	public function new()
