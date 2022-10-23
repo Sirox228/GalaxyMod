@@ -17,9 +17,9 @@ using StringTools;
 
 class PlayWindow
 {
-	public static var res:Array<Float> = [0, 0, 0, 0];
-	public static var stage:Array<Float> = [0, 0];
-	public static var pos:Array<Float> = [0, 0];
+	public static var res:Array<Float> = [0.0, 0.0, 0.0, 0.0];
+	public static var stage:Array<Float> = [0.0, 0.0];
+	public static var pos:Array<Float> = [0.0, 0.0];
 	public static var camz:Float = 1;
 
 	public static function nreset()
