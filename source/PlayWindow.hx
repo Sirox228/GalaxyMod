@@ -31,23 +31,29 @@ class PlayWindow
 
 	public static function reset()
 	{
+                #if !android
 		if (!FlxG.fullscreen)
 		{
+                #end
 			res = [
-				Lib.application.window.x,
-				Lib.application.window.y,
-				Lib.application.window.width,
-				Lib.application.window.height
+				Main.base.x,
+				Main.base.y,
+				Main.base.width,
+				Main.base.height
 			];
+                #if !android
 		}
+                #end
 		stage = [Std.int(Capabilities.screenResolutionX), Std.int(Capabilities.screenResolutionY)];
 		FlxG.scaleMode = new RatioScaleMode();
 	}
 
 	public static function back(camHUD:FlxCamera)
 	{
-		Lib.application.window.move(res[0], res[1]);
-		Lib.application.window.resize(res[2], res[3]);
+		Main.base.x = res[0];
+                Main.base.y = res[1];
+                Main.base.width = res[2];
+                Main.base.height = res[3];
 		camHUD.zoom = 1;
 		camHUD.x = 0;
 		camz = 1;
