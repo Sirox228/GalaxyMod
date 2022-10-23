@@ -53,6 +53,8 @@ import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 import openfl.utils.Assets;
+import flixel.input.actions.FlxActionInput;
+import ui.Hitbox;
 
 using StringTools;
 
@@ -90,6 +92,8 @@ class PlayState extends MusicBeatState
 	public var dad:Character;
 	public var gf:Character;
 	public var boyfriend:Boyfriend;
+	
+	public var _hitbox:Hitbox;
 
 	private var notes:FlxTypedGroup<Note>;
 	private var unspawnNotes:Array<Note> = [];
@@ -764,6 +768,18 @@ class PlayState extends MusicBeatState
 			add(kasti2);
 			kasti2.cameras = [camHUD];
 		}
+		
+		_hitbox = new Hitbox();
+		controls.setHitBox(_hitbox);
+		var theshit = new FlxCamera();
+		FlxG.cameras.add(theshit);
+		theshit.bgColor.alpha = 0;
+		_hitbox.cameras = [theshit];
+
+		trackedinputs = controls.trackedinputs;
+		controls.trackedinputs = [];
+		_hitbox.visible = false;
+		add(_hitbox);
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -1071,6 +1087,9 @@ class PlayState extends MusicBeatState
 
 	function startCountdown():Void
 	{
+	
+	    _hitbox.visible = true;
+		
 		switch (SONG.song.toLowerCase())
 		{
 			case "familanna":
@@ -2311,6 +2330,9 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
+	
+	    _hitbox.visible = false;
+		
 		canPause = false;
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
