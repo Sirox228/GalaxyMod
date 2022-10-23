@@ -42,21 +42,25 @@ class Hitbox extends Sprite {
 			case 3:
 			    col = 0xFF0000;
 		}
-        makeGraphic(col);
+        makeGraphic(order, col);
 		// loop the updateHitbox function to call each frame
 		addEventListener(Event.ENTER_FRAME, updateHitbox);
+		addEventListener(TouchEvent.TOUCH_BEGIN, beginTouchHandle);
+		addEventListener(TouchEvent.TOUCH_END, endTouchHandle);
+		addEventListener(TouchEvent.TOUCH_OUT, endTouchHandle);
 	}
 	
 	// generating graphic, basically similar as in flixel ones, but wothout shape, just because we need Graphics instance as return
-	private function makeGraphic(col:Int):Void {
+	private function makeGraphic(order:Int, col:Int):Void {
 		// TO DO: make a save data for gradient, i think i can simply use FlxG here, because Main is created before this
 		graphics.beginFill(col);
 		graphics.lineStyle(10, col, 1);
-		graphics.drawRect(0, 0, 320, 720);
+		graphics.drawRect(0, 0, order == 3 ? 315 : 310, 720);
 		graphics.endFill();
 	}
 	
 	public var overlaps:Bool = false;
+	public var last:Bool = false;
 	
 	public function updateHitbox(event:Event):Void {
 		// TO DO: make a save data for opacity
@@ -69,7 +73,11 @@ class Hitbox extends Sprite {
 		} else {
 			alpha = 0.0;
 		}
-		if (!pressedScreen) {
+		if (last && overlaps) {
+			last = false;
+			overlaps = false;
+		}
+		if (!justReleasedScreen && !pressedScreen && !justPressedScreen) {
 			overlaps = false;
 		}
 		if (justPressedScreen) {
@@ -78,6 +86,36 @@ class Hitbox extends Sprite {
 		if (justReleasedScreen) {
 			justReleasedScreen = false;
 		}
+	}
+
+	private function beginTouchHandle(event:TouchEvent):Void {
+		justPressedScreen = true;
+		pressedScreen = true;
+		justReleasedScreen = false;
+		releasedScreen = false;
+		// no need to check this for y because hitboxes are 720 pixels height, that means, that they are fullscreen height
+		if (isinRange(event.stageX, get_x(), get_x() + get_width())) {
+			overlaps = true;
+		}
+	}
+	
+	private function endTouchHandle(event:TouchEvent):Void {
+		justPressedScreen = false;
+		pressedScreen = false;
+		justReleasedScreen = true;
+		releasedScreen = true;
+		last = 0;
+		// no need to check this for y because hitboxes are 720 pixels height, that means, that they are fullscreen height
+		if (isinRange(event.stageX, get_x(), get_x() + get_width())) {
+			overlaps = true;
+		}
+	}
+	
+	public function isinRange(pos:Float, start:Float, end:Float) {
+		if (pos >= start && pos <= end) {
+			return true;
+		}
+		return false;
 	}
 }
 
@@ -97,9 +135,7 @@ class HitboxWrapper extends Sprite {
 		hitboxDown = new Hitbox(1);
 		hitboxUp = new Hitbox(2);
 		hitboxRight = new Hitbox(3);
-		ha = [hitboxLeft, hitboxDown, hitboxUp, hitboxRight];
-		addEventListener(TouchEvent.TOUCH_BEGIN, beginTouchHandle);
-		addEventListener(TouchEvent.TOUCH_END, endTouchHandle);
+		ha = [hitboxLeft,hitboxDown,hitboxUp,hitboxRight];
 		addEventListener(TouchEvent.TOUCH_MOVE, moveTouchHandle);
 		// from here, order does not matter for real, cuz each instance of Hitbox have it's own positions
 		addChild(hitboxLeft);
@@ -107,44 +143,26 @@ class HitboxWrapper extends Sprite {
 		addChild(hitboxUp);
 		addChild(hitboxRight);
 	}
-	
-	private function beginTouchHandle(event:TouchEvent):Void {
-		for (i in ha) {
-		    i.justPressedScreen = true;
-		    i.pressedScreen = true;
-		    i.justReleasedScreen = false;
-		    i.releasedScreen = false;
-			trace(event.stageX,i.get_x(),i.get_width());
-		    // no need to check this for y because hitboxes are 720 pixels height, that means, that they are fullscreen height
-		    if (isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width())) {
-			    i.overlaps = true;
-		    }
-	    }
-	}
-	
-	private function endTouchHandle(event:TouchEvent):Void {
-		for (i in ha) {
-		    i.justPressedScreen = false;
-		    i.pressedScreen = false;
-		    i.justReleasedScreen = true;
-		    i.releasedScreen = true;
-		    // no need to check this for y because hitboxes are 720 pixels height, that means, that they are fullscreen height
-		    if (isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width())) {
-			    i.overlaps = false;
-		    }
-	    }
-	}
-	
+
 	private function moveTouchHandle(event:TouchEvent):Void {
 		for (i in ha) {
-		    if (isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width())) {
-			    i.overlaps = true;
-		    } else {
-			    i.overlaps = false;
-		    }
+			if (isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width())) {
+				i.justPressedScreen = true;
+				i.pressedScreen = true;
+				i.justReleased = false;
+				i.released = false;
+				i.overlaps = true;
+			} else {
+				i.justPressedScreen = false;
+				i.pressedScreen = false;
+				i.justReleased = true;
+				i.released = true;
+				i.last = true;
+				i.overlaps = true;
+			}
 		}
 	}
-	
+
 	public function isinRange(pos:Float, start:Float, end:Float) {
 		if (pos >= start && pos <= end) {
 			return true;
