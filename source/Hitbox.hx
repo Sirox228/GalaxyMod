@@ -31,17 +31,12 @@ class Hitbox extends Sprite {
 		switch(order) {
 			case 0:
 			    col = 0xFF00FF;
-			    break;
-			    // break to avoid useless checks for other cases which makes generating hitboxes faster for some milliseconds
 			case 1:
 			    col = 0x00FFFF;
-			    break;
 			case 2:
 			    col = 0x00FF00;
-			    break;
 			case 3:
 			    col = 0xFF0000;
-			    break;
 		}
 		graphics = makeGraphic(col);
 		justReleased = false;
