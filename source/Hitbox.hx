@@ -43,7 +43,7 @@ class Hitbox extends Sprite {
 			    col = 0xFF0000;
 			    break;
 		}
-		graphics = makeGraphic(order, col);
+		graphics = makeGraphic(col);
 		justReleased = false;
 		released = true;
 		pressed = false;
@@ -56,7 +56,7 @@ class Hitbox extends Sprite {
 	}
 	
 	// generating graphic, basically similar as in flixel ones, but wothout shape, just because we need Graphics instance as return
-	private function makeGraphic(orderGraphic:Int, col:Int):Graphics {
+	private function makeGraphic(col:Int):Graphics {
 		var graphic:Graphics = new Graphics(this);
 		// TO DO: make a save data for gradient, i think i can simply use FlxG here, because Main is created before this
 		graphic.beginFill(col);
