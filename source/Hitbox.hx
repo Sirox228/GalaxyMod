@@ -47,7 +47,7 @@ class Hitbox extends Sprite {
 		addEventListener(Event.ENTER_FRAME, updateHitbox);
 		addEventListener(TouchEvent.TOUCH_BEGIN, beginTouchHandle);
 		addEventListener(TouchEvent.TOUCH_END, endTouchHandle);
-		addEventListener(TouchEvent.TOUCH_OUT, endTouchHandle);
+		addEventListener(TouchEvent.TOUCH_OUT, outTouchHandle);
 	}
 	
 	// generating graphic, basically similar as in flixel ones, but wothout shape, just because we need Graphics instance as return
