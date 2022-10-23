@@ -41,8 +41,7 @@ class Hitbox extends Sprite {
 			case 3:
 			    col = 0xFF0000;
 		}
-                @:privateAccess
-		graphics = makeGraphic(col);
+                makeGraphic(col);
 		justReleased = false;
 		released = true;
 		pressed = false;
@@ -55,14 +54,12 @@ class Hitbox extends Sprite {
 	}
 	
 	// generating graphic, basically similar as in flixel ones, but wothout shape, just because we need Graphics instance as return
-	private function makeGraphic(col:Int):Graphics {
-		var graphic:Graphics = new Graphics(this);
+	private function makeGraphic(col:Int):Void {
 		// TO DO: make a save data for gradient, i think i can simply use FlxG here, because Main is created before this
-		graphic.beginFill(col);
-		graphic.lineStyle(10, col, 1);
-		graphic.drawRect(0, 0, width, height);
-		graphic.endFill();
-		return graphic;
+		graphics.beginFill(col);
+		graphics.lineStyle(10, col, 1);
+		graphics.drawRect(0, 0, width, height);
+		graphics.endFill();
 	}
 	
 	// does touch overlaps this sprite
