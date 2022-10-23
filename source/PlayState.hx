@@ -2673,8 +2673,6 @@ class PlayState extends MusicBeatState
 		var downR = controls.DOWN_R || Main.hitbox.hitboxDown.justReleased;
 		var leftR = controls.LEFT_R || Main.hitbox.hitboxLeft.justReleased;
 
-		trace(left,down,up,right,leftP,downP,upP,rightP,leftR,downR,upR,rightR);
-
 		switch (keym)
 		{
 			case 1:
