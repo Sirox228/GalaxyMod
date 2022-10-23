@@ -428,8 +428,8 @@ class M_cyber
 				if ((Conductor.songPosition - 37752.808988764045) / 674.15730337 >= count)
 				{
 					PlayWindow.pos = [
-						FlxG.random.int(480, PlayWindow.stage[0] - 480) * 1.0, // (sirox) stupid way to convert those to float
-						FlxG.random.int(270, PlayWindow.stage[1] - 270) * 1.0
+						Std.parseFloat(Std.string(FlxG.random.int(480, PlayWindow.stage[0] - 480))), // (sirox) crutch to convert int to float
+						Std.parseFloat(Std.string(FlxG.random.int(270, PlayWindow.stage[1] - 270)))
 					];
 					count += 1;
 				}
