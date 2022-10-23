@@ -18,7 +18,7 @@ class Hitbox extends Sprite {
 	private var releasedScreen:Bool = true;
 	private var pressedScreen:Bool = false;
 	private var justPressedScreen:Bool = false;
-	// same, but those are affected only if touch overlaps this button, made them read-only
+	// same, but those are affected only if touch overlaps this button
 	public var justReleased:Bool = false;
 	public var released:Bool = true;
 	public var pressed:Bool = false;
