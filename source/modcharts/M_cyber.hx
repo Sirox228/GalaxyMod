@@ -918,7 +918,7 @@ class M_cyber
 				{
 					if (Conductor.songPosition % 40 < 20)
 					{
-						Main.base.x = PlayWindow.stage[0] / 2 - 320);
+						Main.base.x = PlayWindow.stage[0] / 2 - 320;
 						Main.base.y = PlayWindow.stage[1] / 2
 							+ 180 * FlxMath.fastSin((Conductor.songPosition % 674.15730337) / 674.15730337 * 3.1415926535)
 							- 180;
