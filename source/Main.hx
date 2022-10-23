@@ -37,7 +37,6 @@ class Main extends Sprite
                 hitbox = new HitboxWrapper();
                 Lib.current.addChild(hitbox);
                 hitbox.visible = false;
-                lime.app.Application.current.window.alert("created hitboxes", "debug");
 	}
 
 	public function new()
