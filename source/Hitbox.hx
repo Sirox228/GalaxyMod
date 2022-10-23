@@ -41,6 +41,7 @@ class Hitbox extends Sprite {
 			case 3:
 			    col = 0xFF0000;
 		}
+                @:privateAccess
 		graphics = makeGraphic(col);
 		justReleased = false;
 		released = true;
