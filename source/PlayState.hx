@@ -54,7 +54,6 @@ import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
 import openfl.utils.Assets;
 import flixel.input.actions.FlxActionInput;
-import ui.Hitbox;
 
 using StringTools;
 
@@ -92,8 +91,6 @@ class PlayState extends MusicBeatState
 	public var dad:Character;
 	public var gf:Character;
 	public var boyfriend:Boyfriend;
-	
-	public var _hitbox:Hitbox;
 
 	private var notes:FlxTypedGroup<Note>;
 	private var unspawnNotes:Array<Note> = [];
@@ -768,18 +765,6 @@ class PlayState extends MusicBeatState
 			add(kasti2);
 			kasti2.cameras = [camHUD];
 		}
-		
-		_hitbox = new Hitbox();
-		controls.setHitBox(_hitbox);
-		var theshit = new FlxCamera();
-		FlxG.cameras.add(theshit);
-		theshit.bgColor.alpha = 0;
-		_hitbox.cameras = [theshit];
-
-		trackedinputs = controls.trackedinputs;
-		controls.trackedinputs = [];
-		_hitbox.visible = false;
-		add(_hitbox);
 
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
@@ -1102,7 +1087,7 @@ class PlayState extends MusicBeatState
 		}
 		inCutscene = false;
 		
-		_hitbox.visible = true;
+		Main.hitbox.visible = true;
 
 		generateStaticArrows(0);
 		generateStaticArrows(1);
@@ -2332,7 +2317,7 @@ class PlayState extends MusicBeatState
 	function endSong():Void
 	{
 	
-	    _hitbox.visible = false;
+	        Main.hitbox.visible = false;
 		
 		canPause = false;
 		FlxG.sound.music.volume = 0;
@@ -2673,20 +2658,20 @@ class PlayState extends MusicBeatState
 
 	private function keyShit():Void
 	{
-		var up = controls.UP;
-		var right = controls.RIGHT;
-		var down = controls.DOWN;
-		var left = controls.LEFT;
+		var up = controls.UP || Main.hitbox.hitboxUp.pressed;
+		var right = controls.RIGHT || Main.hitbox.hitboxRight.pressed;
+		var down = controls.DOWN || Main.hitbox.hitboxDown.pressed;
+		var left = controls.LEFT || Main.hitbox.hitboxLeft.pressed;
 
-		var upP = controls.UP_P;
-		var rightP = controls.RIGHT_P;
-		var downP = controls.DOWN_P;
-		var leftP = controls.LEFT_P;
+		var upP = controls.UP_P || Main.hitbox.hitboxUp.justPressed;
+		var rightP = controls.RIGHT_P || Main.hitbox.hitboxRight.justPressed;
+		var downP = controls.DOWN_P || Main.hitbox.hitboxDown.justPressed;
+		var leftP = controls.LEFT_P || Main.hitbox.hitboxLeft.justPressed;
 
-		var upR = controls.UP_R;
-		var rightR = controls.RIGHT_R;
-		var downR = controls.DOWN_R;
-		var leftR = controls.LEFT_R;
+		var upR = controls.UP_R || Main.hitbox.hitboxUp.justReleased;
+		var rightR = controls.RIGHT_R || Main.hitbox.hitboxUp.justReleased;
+		var downR = controls.DOWN_R || Main.hitbox.hitboxUp.justReleased;
+		var leftR = controls.LEFT_R || Main.hitbox.hitboxUp.justReleased;
 		switch (keym)
 		{
 			case 1:
