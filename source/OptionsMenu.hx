@@ -262,8 +262,7 @@ class OptionsMenu extends MusicBeatState
 					{
 						MainMenuState.optioned = true;
 						MainMenuState.storied = true;
-						FlxTransitionableState.skipNextTransIn = true;
-						FlxG.switchState(new MainMenuState());
+						LoadingState.loadAndSwitchState(new MainMenuState(), false, 1);
 					}
 					else
 					{
