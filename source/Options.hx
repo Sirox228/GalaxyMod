@@ -409,7 +409,7 @@ class FPSOption extends Option
 	public override function right():Bool
 	{
 		if (!FlxG.save.data.FPS)
-			FlxG.save.data.FPS = 120;
+			FlxG.save.data.FPS = 60;
 		if (FlxG.save.data.FPS < 240)
 			FlxG.save.data.FPS += 1;
 		display = updateDisplay();
