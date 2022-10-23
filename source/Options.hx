@@ -425,7 +425,7 @@ class FPSOption extends Option
 	private override function updateDisplay2():Array<String>
 	{
 		if (FlxG.save.data.FPS == null)
-			FlxG.save.data.FPS = 120;
+			FlxG.save.data.FPS = 60;
 		FlxG.updateFramerate = FlxG.save.data.FPS;
 		FlxG.drawFramerate = FlxG.save.data.FPS;
 		return [FlxG.save.data.FPS + ""];
