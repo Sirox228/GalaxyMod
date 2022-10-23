@@ -34,7 +34,7 @@ class Hitbox extends Sprite {
 			    break;
 			    // break to avoid useless checks for other cases which makes generating hitboxes faster for some milliseconds
 			case 1:
-			    col = 0x00FFFF:
+			    col = 0x00FFFF;
 			    break;
 			case 2:
 			    col = 0x00FF00;
