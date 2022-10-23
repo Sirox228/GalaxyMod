@@ -9,6 +9,9 @@ import openfl.display.Shape;
 /*
 * @author: Sirox
 */
+@:access(openfl.display.Graphics)
+@:access(openfl.display.Sprite)
+@:acesss(ooenfl.display.DisplayObject)
 class Hitbox extends Sprite {
 	// some of the basic variables to detect touch, those are for whole screen, made them private
 	private var justReleasedScreen:Bool = false;
@@ -16,10 +19,10 @@ class Hitbox extends Sprite {
 	private var pressedScreen:Bool = false;
 	private var justPressedScreen:Bool = false;
 	// same, but those are affected only if touch overlaps this button, made them read-only
-	public var justReleased(default, never):Bool;
-	public var released(default, never):Bool;
-	public var pressed(default, never):Bool;
-	public var justPressed(default, never):Bool;
+	public var justReleased:Bool = false;
+	public var released:Bool = true;
+	public var pressed:Bool = false;
+	public var justPressed:Bool = false;
 	
 	public function new(order:Int) {
 		super();
