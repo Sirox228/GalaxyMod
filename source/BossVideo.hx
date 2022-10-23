@@ -14,7 +14,7 @@ class BossVideo extends VideoHandler
 	override function update(?E:Event):Void
 	{
 		isPlaying = libvlc.isPlaying();
-		if (canSkip && controls.ACCEPT && initComplete)
+		if (canSkip && (controls.ACCEPT #if android || FlxG.android.justReleased.BACK #end) && initComplete)
 		{
 			FlxG.sound.music.stop();
 			onVLCComplete();
