@@ -95,8 +95,8 @@ class OptionsMenu extends MusicBeatState
 
 		super.create();
 		
-    #if android 
-		addVirtualPad(NONE, B);
+        #if android 
+		addVirtualPad(LEFT_RIGHT, B); //change fps thing lol
 		#end
 	}
 

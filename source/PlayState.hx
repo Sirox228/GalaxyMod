@@ -1088,7 +1088,6 @@ class PlayState extends MusicBeatState
 	function startCountdown():Void
 	{
 	
-	    _hitbox.visible = true;
 		
 		switch (SONG.song.toLowerCase())
 		{
@@ -1102,6 +1101,8 @@ class PlayState extends MusicBeatState
 				remove(anime);
 		}
 		inCutscene = false;
+		
+		_hitbox.visible = true;
 
 		generateStaticArrows(0);
 		generateStaticArrows(1);
