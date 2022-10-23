@@ -11,7 +11,7 @@ import openfl.display.Shape;
 */
 @:access(openfl.display.Graphics)
 @:access(openfl.display.Sprite)
-@:acesss(ooenfl.display.DisplayObject)
+@:access(ooenfl.display.DisplayObject)
 class Hitbox extends Sprite {
 	// some of the basic variables to detect touch, those are for whole screen, made them private
 	private var justReleasedScreen:Bool = false;
