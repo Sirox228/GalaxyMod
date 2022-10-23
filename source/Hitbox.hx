@@ -98,13 +98,28 @@ class Hitbox extends Sprite {
 			overlaps = true;
 		}
 	}
+
+        private var lastOut:Int = 0;
+
+        private function outTouchHandle(event:TouchEvent):Void {
+		justPressedScreen = false;
+		pressedScreen = false;
+		justReleasedScreen = true;
+		releasedScreen = true;
+                last = true;
+                lastOut = 0;
+		// no need to check this for y because hitboxes are 720 pixels height, that means, that they are fullscreen height
+		if (isinRange(event.stageX, get_x(), get_x() + get_width())) {
+			overlaps = true;
+		}
+	}
 	
 	private function endTouchHandle(event:TouchEvent):Void {
 		justPressedScreen = false;
 		pressedScreen = false;
 		justReleasedScreen = true;
 		releasedScreen = true;
-		last = 0;
+                last = true;
 		// no need to check this for y because hitboxes are 720 pixels height, that means, that they are fullscreen height
 		if (isinRange(event.stageX, get_x(), get_x() + get_width())) {
 			overlaps = true;
@@ -146,11 +161,12 @@ class HitboxWrapper extends Sprite {
 
 	private function moveTouchHandle(event:TouchEvent):Void {
 		for (i in ha) {
-			if (isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width())) {
+			if (isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width()) && i.lastOut != 1) {
 				i.justPressedScreen = true;
 				i.pressedScreen = true;
 				i.justReleased = false;
 				i.released = false;
+                                i.lastOut = 1;
 				i.overlaps = true;
 			} else {
 				i.justPressedScreen = false;
