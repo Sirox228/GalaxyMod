@@ -99,7 +99,7 @@ class Hitbox extends Sprite {
 		}
 	}
 
-        private var lastOut:Int = 0;
+        public var lastOut:Int = 0;
 
         private function outTouchHandle(event:TouchEvent):Void {
 		justPressedScreen = false;
