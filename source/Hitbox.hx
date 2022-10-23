@@ -65,9 +65,9 @@ class Hitbox extends Sprite {
 		pressed = pressedScreen && overlaps;
 		released = releasedScreen && overlaps;
 		if (pressed) {
-			alpha = 0.75;
+			alpha = 0.3;
 		} else {
-			alpha = 1.0;
+			alpha = 0.0;
 		}
 		if (!pressedScreen) {
 			overlaps = false;
