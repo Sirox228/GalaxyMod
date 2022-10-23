@@ -14,10 +14,10 @@ import openfl.display.Shape;
 @:access(ooenfl.display.DisplayObject)
 class Hitbox extends Sprite {
 	// some of the basic variables to detect touch, those are for whole screen, made them private
-	private var justReleasedScreen:Bool = false;
-	private var releasedScreen:Bool = true;
-	private var pressedScreen:Bool = false;
-	private var justPressedScreen:Bool = false;
+	public var justReleasedScreen:Bool = false;
+	public var releasedScreen:Bool = true;
+	public var pressedScreen:Bool = false;
+	public var justPressedScreen:Bool = false;
 	// same, but those are affected only if touch overlaps this button
 	public var justReleased:Bool = false;
 	public var released:Bool = true;
@@ -26,10 +26,11 @@ class Hitbox extends Sprite {
 	
 	public function new(order:Int) {
 		super();
-		x = 320 * order;
-		y = 0;
-		width = 320;
-		height = 720;
+		set_x(order == 0 ? 0 : 320 * order); // for some reason it don't want to work if i set just 320 * order
+		set_y(0);
+		/*width = 320;
+		height = 720;*/
+		trace(x,y,width,height);
 		var col:Int = 0xFFFFFF;
 		switch(order) {
 			case 0:
@@ -41,16 +42,9 @@ class Hitbox extends Sprite {
 			case 3:
 			    col = 0xFF0000;
 		}
-                makeGraphic(col);
-		justReleased = false;
-		released = true;
-		pressed = false;
-		justPressed = false;
+        makeGraphic(col);
 		// loop the updateHitbox function to call each frame
 		addEventListener(Event.ENTER_FRAME, updateHitbox);
-		addEventListener(TouchEvent.TOUCH_BEGIN, beginTouchHandle);
-		addEventListener(TouchEvent.TOUCH_END, endTouchHandle);
-		addEventListener(TouchEvent.TOUCH_MOVE, beginTouchHandle);
 	}
 	
 	// generating graphic, basically similar as in flixel ones, but wothout shape, just because we need Graphics instance as return
@@ -58,11 +52,10 @@ class Hitbox extends Sprite {
 		// TO DO: make a save data for gradient, i think i can simply use FlxG here, because Main is created before this
 		graphics.beginFill(col);
 		graphics.lineStyle(10, col, 1);
-		graphics.drawRect(0, 0, width, height);
+		graphics.drawRect(0, 0, 320, 720);
 		graphics.endFill();
 	}
 	
-	// does touch overlaps this sprite
 	public var overlaps:Bool = false;
 	
 	public function updateHitbox(event:Event):Void {
@@ -74,7 +67,7 @@ class Hitbox extends Sprite {
 		if (pressed) {
 			alpha = 0.75;
 		} else {
-			alpha = 0.0;
+			alpha = 1.0;
 		}
 		if (!pressedScreen) {
 			overlaps = false;
@@ -86,42 +79,6 @@ class Hitbox extends Sprite {
 			justReleasedScreen = false;
 		}
 	}
-	
-	private function beginTouchHandle(event:TouchEvent):Void {
-		justPressedScreen = true;
-		pressedScreen = true;
-		justReleasedScreen = false;
-		releasedScreen = false;
-		// no need to check this for y because hitboxes are 720 pixels height, that means, that they are fullscreen height
-		if (isinRange(event.localX, event.sizeX, x, x + width)) {
-			overlaps = true;
-		}
-	}
-	
-	private function endTouchHandle(event:TouchEvent):Void {
-		justPressedScreen = false;
-		pressedScreen = false;
-		justReleasedScreen = true;
-		releasedScreen = true;
-		if (isinRange(event.localX, event.sizeX, x, x + width)) {
-			overlaps = false;
-		}
-	}
-	
-	private function moveTouchHandle(event:TouchEvent):Void {
-		if (isinRange(event.localX, event.sizeX, x, x + width)) {
-			overlaps = true;
-		} else {
-			overlaps = false;
-		}
-	}
-	
-	public function isinRange(pos:Float, size:Float, start:Float, end:Float) {
-		if (pos + size >= start && pos + size <= end + size) {
-			return true;
-		}
-		return false;
-	}
 }
 
 /*
@@ -132,16 +89,66 @@ class HitboxWrapper extends Sprite {
 	public var hitboxDown:Hitbox;
 	public var hitboxUp:Hitbox;
 	public var hitboxRight:Hitbox;
+	public var ha:Array<Hitbox> = [];
+	
 	public function new() {
 		super();
 		hitboxLeft = new Hitbox(0);
 		hitboxDown = new Hitbox(1);
 		hitboxUp = new Hitbox(2);
 		hitboxRight = new Hitbox(3);
+		ha = [hitboxLeft, hitboxDown, hitboxUp, hitboxRight];
+		addEventListener(TouchEvent.TOUCH_BEGIN, beginTouchHandle);
+		addEventListener(TouchEvent.TOUCH_END, endTouchHandle);
+		addEventListener(TouchEvent.TOUCH_MOVE, moveTouchHandle);
 		// from here, order does not matter for real, cuz each instance of Hitbox have it's own positions
 		addChild(hitboxLeft);
 		addChild(hitboxDown);
 		addChild(hitboxUp);
 		addChild(hitboxRight);
+	}
+	
+	private function beginTouchHandle(event:TouchEvent):Void {
+		for (i in ha) {
+		    i.justPressedScreen = true;
+		    i.pressedScreen = true;
+		    i.justReleasedScreen = false;
+		    i.releasedScreen = false;
+			trace(event.stageX,i.get_x(),i.get_width());
+		    // no need to check this for y because hitboxes are 720 pixels height, that means, that they are fullscreen height
+		    if (isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width())) {
+			    i.overlaps = true;
+		    }
+	    }
+	}
+	
+	private function endTouchHandle(event:TouchEvent):Void {
+		for (i in ha) {
+		    i.justPressedScreen = false;
+		    i.pressedScreen = false;
+		    i.justReleasedScreen = true;
+		    i.releasedScreen = true;
+		    // no need to check this for y because hitboxes are 720 pixels height, that means, that they are fullscreen height
+		    if (isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width())) {
+			    i.overlaps = false;
+		    }
+	    }
+	}
+	
+	private function moveTouchHandle(event:TouchEvent):Void {
+		for (i in ha) {
+		    if (isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width())) {
+			    i.overlaps = true;
+		    } else {
+			    i.overlaps = false;
+		    }
+		}
+	}
+	
+	public function isinRange(pos:Float, start:Float, end:Float) {
+		if (pos >= start && pos <= end) {
+			return true;
+		}
+		return false;
 	}
 }
