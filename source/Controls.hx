@@ -12,7 +12,6 @@ import flixel.input.gamepad.FlxGamepadButton;
 import flixel.input.gamepad.FlxGamepadInputID;
 import flixel.input.keyboard.FlxKey;
 import flixel.group.FlxGroup;
-import ui.Hitbox;
 import ui.FlxVirtualPad;
 import flixel.ui.FlxButton;
 
@@ -364,16 +363,6 @@ public var trackedinputs:Array<FlxActionInput> = [];
 		action.add(input);
 		//action.addInput(button, state);
 	}
-	
-	public function setHitBox(hitbox:Hitbox) 
-	{
-		inline forEachBound(Control.UP, (action, state) -> addbutton(action, hitbox.buttonUp, state));
-		inline forEachBound(Control.DOWN, (action, state) -> addbutton(action, hitbox.buttonDown, state));		
-		inline forEachBound(Control.LEFT, (action, state) -> addbutton(action, hitbox.buttonLeft, state));		
-		inline forEachBound(Control.RIGHT, (action, state) -> addbutton(action, hitbox.buttonRight, state));
-	}
-
-
 	
 	public function setVirtualPad(virtualPad:FlxVirtualPad, ?DPad:FlxDPadMode, ?Action:FlxActionMode) {
 		if (DPad == null)
