@@ -168,13 +168,6 @@ class HitboxWrapper extends Sprite {
 				i.released = false;
                                 i.lastOut = 1;
 				i.overlaps = true;
-			} else {
-				i.justPressedScreen = false;
-				i.pressedScreen = false;
-				i.justReleased = true;
-				i.released = true;
-				i.last = true;
-				i.overlaps = true;
 			}
 		}
 	}
