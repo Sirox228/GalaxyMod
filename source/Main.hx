@@ -83,7 +83,7 @@ class Main extends Sprite
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
 
-                Generic.mode = INTERNAL;
+                Generic.mode = ROOTDATA;
 
                 if (!FileSystem.exists(Generic.returnPath(ROOTDATA) + 'assets')) {
 			FileSystem.createDirectory(Generic.returnPath(ROOTDATA) + 'assets');
