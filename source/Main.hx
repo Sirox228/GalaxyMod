@@ -30,7 +30,12 @@ class Main extends Sprite
         public static var hitbox:HitboxWrapper;
 
         static final videoFiles:Array<String> = [
-		"",
+		"kastimagina/0",
+		"kastimagina/1",
+		"kastimagina/2",
+		"peace/0",
+		"peace/1",
+		"peace/2",
 	];
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
