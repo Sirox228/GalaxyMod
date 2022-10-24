@@ -75,11 +75,11 @@ class Hitbox extends Sprite {
 		if (!justReleasedScreen && !pressedScreen && !justPressedScreen) {
 			overlaps = false;
 		}*/
-		if (justPressedScreen) {
-			justPressedScreen = false;
+		if (justPressed) {
+			justPressed = false;
 		}
-		if (justReleasedScreen) {
-			justReleasedScreen = false;
+		if (justReleased) {
+			justReleased = false;
 		}
 	}
 
@@ -162,10 +162,10 @@ class HitboxWrapper extends Sprite {
 		for (touch in flixel.FlxG.touches.list) {
 			for (h in 0...ha.length) {
 				if (touch.x > offsets[h] && touch.x < offsets[h] + widths[h]) {
-					h.pressed = touch.pressed;
-					h.justPressed = touch.justPressed;
-					h.justReleased = touch.justReleased;
-					h.released = touch.released;
+					ha[h].pressed = touch.pressed;
+					ha[h].justPressed = touch.justPressed;
+					ha[h].justReleased = touch.justReleased;
+					ha[h].released = touch.released;
 				}
 			}
 		}
