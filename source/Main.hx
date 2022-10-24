@@ -13,6 +13,7 @@ import openfl.events.Event;
 import openfl.text.TextField;
 import openfl.text.TextFormat;
 import Hitbox;
+import sys.FileSystem;
 
 class Main extends Sprite
 {
