@@ -585,7 +585,10 @@ class PlayState extends MusicBeatState
 		// doof.x += 70;
 		// doof.y = FlxG.height * 0.5;
 		doof.scrollFactor.set();
-		doof.finishThing = startCountdown;
+		doof.finishThing = function() {
+                    Main.hitbox.visible = true;
+                    startCountdown();
+                };
 		doof.screenThing = dialoguebg;
 		doof.unfinish = cutscene;
 		switch (SONG.song.toLowerCase())
@@ -777,6 +780,7 @@ class PlayState extends MusicBeatState
 		{
 			if (skipStory)
 			{
+                                Main.hitbox.visible = true;
 				startCountdown();
 			}
 			else
@@ -830,6 +834,7 @@ class PlayState extends MusicBeatState
 					case 'peace':
 						schoolIntro(doof);
 					default:
+                                                Main.hitbox.visible = true;
 						startCountdown();
 				}
 				skipStory = true;
@@ -839,6 +844,7 @@ class PlayState extends MusicBeatState
 		{
 			if (skipStory)
 			{
+                                Main.hitbox.visible = true;
 				startCountdown();
 			}
 			else
@@ -848,6 +854,7 @@ class PlayState extends MusicBeatState
 					case 'familanna':
 						schoolIntro(doof);
 					default:
+                                                Main.hitbox.visible = true;
 						startCountdown();
 				}
 				skipStory = true;
@@ -859,6 +866,7 @@ class PlayState extends MusicBeatState
 
 	function schoolIntro(?dialogueBox:DialogueBox, numbbb:Int = 0):Void
 	{
+                Main.hitbox.visible = false;
 		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		black.scrollFactor.set();
 		add(black);
@@ -1009,9 +1017,10 @@ class PlayState extends MusicBeatState
 						add(dialogueBox);
 					}
 				}
-				else
+				else {
+                                        Main.hitbox.visible = true;
 					startCountdown();
-
+                                }
 				remove(black);
 			}
 		});
@@ -1039,7 +1048,10 @@ class PlayState extends MusicBeatState
 	function bossVideo():Void
 	{
 		var video:BossVideo = new BossVideo();
-		video.finishCallback = startCountdown;
+		video.finishCallback = function() {
+                    Main.hitbox.visible = true;
+                    startCountdown();
+                }
 		video.canSkip = StoryMenuState.weekPassed[Std.int(Math.min(storyWeek, StoryMenuState.weekPassed.length - 1))][storyDifficulty];
 		video.playVideo(Paths.video(SONG.song.toLowerCase() + "/" + storyDifficulty));
 		FlxG.sound.playMusic(Paths.music(SONG.song.toLowerCase()), 1, false);
@@ -1058,11 +1070,15 @@ class PlayState extends MusicBeatState
 					sddd = CoolUtil.coolTextFile(Paths.txt('cona/conaDialogue2'));
 				var sth:DialogueBox = new DialogueBox(false, sddd, 1);
 				sth.scrollFactor.set();
-				sth.finishThing = startCountdown;
+				sth.finishThing = function() {
+                                    Main.hitbox.visible = true;
+                                    startCountdown();
+                                };
 				sth.cameras = [camDia];
 				schoolIntro(sth, 1);
 			case "cyber":
 				remove(anime);
+                                Main.hitbox.visible = true;
 				startCountdown();
 		}
 	}
@@ -1086,8 +1102,6 @@ class PlayState extends MusicBeatState
 				remove(anime);
 		}
 		inCutscene = false;
-		
-		Main.hitbox.visible = true;
 
 		generateStaticArrows(0);
 		generateStaticArrows(1);
