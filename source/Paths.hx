@@ -77,7 +77,7 @@ class Paths
 
 	inline static public function video(key:String)
 	{
-		return Generic.returnPath(ROOTDATA) + getPreloadPath('videos/$key.mp4');
+		return Generic.returnPath() + getPreloadPath('videos/$key.mp4');
 	}
 
         inline static public function _video(key:String)
