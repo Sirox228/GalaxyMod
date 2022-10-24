@@ -14,12 +14,13 @@ import openfl.text.TextField;
 import openfl.text.TextFormat;
 import Hitbox;
 import sys.FileSystem;
+import Generic;
 
 class Main extends Sprite
 {
 	var gameWidth:Int = 1280; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	var gameHeight:Int = 720; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
-	public static var initialState:Class<FlxState> = TitleState; // The FlxState the game starts with.
+	public static var initialState:Class<FlxState> = PermsState; // The FlxState the game starts with.
 	var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions.
 	var framerate:Int = 60; // How many frames per second the game should run at.
 	var skipSplash:Bool = true; // Whether to skip the flixel splash screen that appears in release mode.
@@ -101,10 +102,6 @@ class Main extends Sprite
                 for (vid in videoFiles) {
 			Generic.copyContent(Paths._video(vid), Paths._video(vid));
 		}
-
-		#if !debug
-		initialState = TitleState;
-		#end
 
 		FlxG.save.bind('funkin', 'ninjamuffin99');
 
