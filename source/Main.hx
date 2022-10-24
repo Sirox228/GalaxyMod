@@ -91,15 +91,15 @@ class Main extends Sprite
 
                 Generic.mode = ROOTDATA;
 
-                if (!FileSystem.exists(Generic.returnPath(ROOTDATA) + 'assets')) {
-			FileSystem.createDirectory(Generic.returnPath(ROOTDATA) + 'assets');
+                if (!FileSystem.exists(Generic.returnPath() + 'assets')) {
+			FileSystem.createDirectory(Generic.returnPath() + 'assets');
 		}
-		if (!FileSystem.exists(Generic.returnPath(ROOTDATA) + 'assets/videos')) {
-			FileSystem.createDirectory(Generic.returnPath(ROOTDATA) + 'assets/videos');
+		if (!FileSystem.exists(Generic.returnPath() + 'assets/videos')) {
+			FileSystem.createDirectory(Generic.returnPath() + 'assets/videos');
 		}
 
                 for (vid in videoFiles) {
-			Generic.copyContent(Paths._video(vid), Paths._video(vid), ROOTDATA);
+			Generic.copyContent(Paths._video(vid), Paths._video(vid));
 		}
 
 		#if !debug
