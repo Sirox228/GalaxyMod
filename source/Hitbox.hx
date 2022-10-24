@@ -9,15 +9,13 @@ import openfl.display.Shape;
 /*
 * @author: Sirox
 */
-@:access(openfl.display.Graphics)
-@:access(openfl.display.Sprite)
-@:access(ooenfl.display.DisplayObject)
+@:allow(HitboxWrapper)
 class Hitbox extends Sprite {
 	// some of the basic variables to detect touch, those are for whole screen, made them private
-	public var justReleasedScreen:Bool = false;
-	public var releasedScreen:Bool = true;
-	public var pressedScreen:Bool = false;
-	public var justPressedScreen:Bool = false;
+	private var justReleasedScreen:Bool = false;
+	private var releasedScreen:Bool = true;
+	private var pressedScreen:Bool = false;
+	private var justPressedScreen:Bool = false;
 	// same, but those are affected only if touch overlaps this button
 	public var justReleased:Bool = false;
 	public var released:Bool = true;
@@ -59,8 +57,8 @@ class Hitbox extends Sprite {
 		graphics.endFill();
 	}
 	
-	public var overlaps:Bool = false;
-	public var last:Bool = false;
+	private var overlaps:Bool = false;
+	private var last:Bool = false;
 	
 	public function updateHitbox(event:Event):Void {
 		// TO DO: make a save data for opacity
@@ -99,7 +97,7 @@ class Hitbox extends Sprite {
 		}
 	}
 
-        public var lastOut:Int = 0;
+        private var lastOut:Int = 0;
 
         private function outTouchHandle(event:TouchEvent):Void {
 		justPressedScreen = false;
@@ -126,7 +124,7 @@ class Hitbox extends Sprite {
 		}
 	}
 	
-	public function isinRange(pos:Float, start:Float, end:Float) {
+	private function isinRange(pos:Float, start:Float, end:Float) {
 		if (pos >= start && pos <= end) {
 			return true;
 		}
@@ -135,7 +133,7 @@ class Hitbox extends Sprite {
 }
 
 /*
-* class that wraps all 4 hitboxes together into a single sprite
+* class that wraps all 4 hitboxes together into a single sprite, also moving touch
 */
 class HitboxWrapper extends Sprite {
 	public var hitboxLeft:Hitbox;
@@ -161,7 +159,7 @@ class HitboxWrapper extends Sprite {
 
 	private function moveTouchHandle(event:TouchEvent):Void {
 		for (i in ha) {
-			if (isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width()) && i.lastOut != 1) {
+			if (i.isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width()) && i.lastOut != 1) {
 				i.justPressedScreen = true;
 				i.pressedScreen = true;
 				i.justReleased = false;
@@ -170,12 +168,5 @@ class HitboxWrapper extends Sprite {
 				i.overlaps = true;
 			}
 		}
-	}
-
-	public function isinRange(pos:Float, start:Float, end:Float) {
-		if (pos >= start && pos <= end) {
-			return true;
-		}
-		return false;
 	}
 }
