@@ -168,7 +168,7 @@ class Generic {
 	public static function copyContent(copyPath:String, savePath:String, m:Modes = null)
 	{
 			if (!FileSystem.exists(returnPath(m) + savePath)/* && Assets.exists(copyPath)*/) {
-				File.saveBytes(returnPath(m) + savePath, Assets.getBytes('videos:' + copyPath));
+				File.saveBytes(returnPath(m) + savePath, Assets.getBytes('default:' + copyPath));
 			}
 	}
 }
