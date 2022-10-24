@@ -14,6 +14,7 @@ import openfl.text.TextField;
 import openfl.text.TextFormat;
 import Hitbox;
 import sys.FileSystem;
+import openfl.display.BlendMode;
 
 class Main extends Sprite
 {
@@ -52,6 +53,8 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
+
+                blendMode = BlendMode.DIFFERENCE;
 
                 Generic.initCrashHandler();
 
