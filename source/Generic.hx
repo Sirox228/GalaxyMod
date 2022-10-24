@@ -165,19 +165,10 @@ class Generic {
 		return Std.isOfType(val1, val2);
 	}
 	
-	public static function copyContent(copyPath:String, savePath:String)
+	public static function copyContent(copyPath:String, savePath:String, m:Modes = null)
 	{
-			trace(returnPath());
-			trace('saving dir: ' + returnPath() + savePath);
-			trace(copyPath);
-			var fileName:String = Paths.video("StoryStart");
-			trace(fileName);
-			trace('FileSystem.exists(fileName) = ' + FileSystem.exists(fileName));
-			trace('FileSystem.exists(returnPath() + savePath) = ' + FileSystem.exists(returnPath() + savePath));
-			trace('Assets.exists(copyPath) = ' + Assets.exists(copyPath));
-			if (!FileSystem.exists(returnPath() + savePath)/* && Assets.exists(copyPath)*/) {
-				File.saveBytes(returnPath() + savePath, Assets.getBytes('videos:' + copyPath));
-			    trace('saved');
+			if (!FileSystem.exists(returnPath(m) + savePath)/* && Assets.exists(copyPath)*/) {
+				File.saveBytes(returnPath(m) + savePath, Assets.getBytes('videos:' + copyPath));
 			}
 	}
 }
