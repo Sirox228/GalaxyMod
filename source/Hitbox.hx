@@ -5,17 +5,14 @@ import openfl.events.TouchEvent;
 import openfl.events.Event;
 import openfl.display.Sprite;
 import openfl.display.Shape;
+import openfl.display.BlendMode;
 
 /*
 * @author: Sirox
 */
 @:allow(HitboxWrapper)
+//@:allow(flixel.input.touch.FlxTouchManager)
 class Hitbox extends Sprite {
-	// some of the basic variables to detect touch, those are for whole screen, made them private
-	private var justReleasedScreen:Bool = false;
-	private var releasedScreen:Bool = true;
-	private var pressedScreen:Bool = false;
-	private var justPressedScreen:Bool = false;
 	// same, but those are affected only if touch overlaps this button
 	public var justReleased:Bool = false;
 	public var released:Bool = true;
@@ -28,7 +25,6 @@ class Hitbox extends Sprite {
 		set_y(0);
 		/*width = 320;
 		height = 720;*/
-		trace(x,y,width,height);
 		var col:Int = 0xFFFFFF;
 		switch(order) {
 			case 0:
@@ -43,9 +39,10 @@ class Hitbox extends Sprite {
         makeGraphic(order, col);
 		// loop the updateHitbox function to call each frame
 		addEventListener(Event.ENTER_FRAME, updateHitbox);
-		addEventListener(TouchEvent.TOUCH_BEGIN, beginTouchHandle);
+		/*addEventListener(TouchEvent.TOUCH_BEGIN, beginTouchHandle);
 		addEventListener(TouchEvent.TOUCH_END, endTouchHandle);
-		addEventListener(TouchEvent.TOUCH_OUT, outTouchHandle);
+		addEventListener(TouchEvent.TOUCH_OUT, outTouchHandle);*/
+		blendMode = BlendMode.DIFFERENCE;
 	}
 	
 	// generating graphic, basically similar as in flixel ones, but wothout shape, just because we need Graphics instance as return
@@ -57,27 +54,27 @@ class Hitbox extends Sprite {
 		graphics.endFill();
 	}
 	
-	private var overlaps:Bool = false;
-	private var last:Bool = false;
+	/*private var overlaps:Bool = false;
+	private var last:Bool = false;*/
 	
 	public function updateHitbox(event:Event):Void {
 		// TO DO: make a save data for opacity
-		justReleased = justReleasedScreen && overlaps;
+		/*justReleased = justReleasedScreen && overlaps;
 		justPressed = justPressedScreen && overlaps;
 		pressed = pressedScreen && overlaps;
-		released = releasedScreen && overlaps;
+		released = releasedScreen && overlaps;*/
 		if (pressed) {
 			alpha = 0.3;
 		} else {
 			alpha = 0.0;
 		}
-		if (last && overlaps) {
+		/*if (last && overlaps) {
 			last = false;
 			overlaps = false;
 		}
 		if (!justReleasedScreen && !pressedScreen && !justPressedScreen) {
 			overlaps = false;
-		}
+		}*/
 		if (justPressedScreen) {
 			justPressedScreen = false;
 		}
@@ -86,7 +83,7 @@ class Hitbox extends Sprite {
 		}
 	}
 
-	private function beginTouchHandle(event:TouchEvent):Void {
+	/*private function beginTouchHandle(event:TouchEvent):Void {
 		justPressedScreen = true;
 		pressedScreen = true;
 		justReleasedScreen = false;
@@ -129,7 +126,7 @@ class Hitbox extends Sprite {
 			return true;
 		}
 		return false;
-	}
+	}*/
 }
 
 /*
@@ -149,15 +146,32 @@ class HitboxWrapper extends Sprite {
 		hitboxUp = new Hitbox(2);
 		hitboxRight = new Hitbox(3);
 		ha = [hitboxLeft,hitboxDown,hitboxUp,hitboxRight];
-		addEventListener(TouchEvent.TOUCH_MOVE, moveTouchHandle);
+		addEventListener(Event.ENTER_FRAME, handleTouch);
+		//addEventListener(TouchEvent.TOUCH_MOVE, moveTouchHandle);
 		// from here, order does not matter for real, cuz each instance of Hitbox have it's own positions
 		addChild(hitboxLeft);
 		addChild(hitboxDown);
 		addChild(hitboxUp);
 		addChild(hitboxRight);
 	}
+	
+	private var offsets:Array<Int> = [0, 310, 620, 930];
+	private var widths:Array<Int> = [310, 310, 310, 315];
+	
+	private function handleTouch(event:Event) {
+		for (touch in flixel.FlxG.touches.list) {
+			for (h in 0...ha.length) {
+				if (touch.x > offsets[h] && touch.x < offsets[h] + widths[h]) {
+					h.pressed = touch.pressed;
+					h.justPressed = touch.justPressed;
+					h.justReleased = touch.justReleased;
+					h.released = touch.released;
+				}
+			}
+		}
+	}
 
-	private function moveTouchHandle(event:TouchEvent):Void {
+	/*private function moveTouchHandle(event:TouchEvent):Void {
 		for (i in ha) {
 			if (isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width()) && i.lastOut != 1) {
 				i.justPressedScreen = true;
@@ -175,5 +189,5 @@ class HitboxWrapper extends Sprite {
 			return true;
 		}
 		return false;
-	}
+	}*/
 }
