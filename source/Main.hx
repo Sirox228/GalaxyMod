@@ -28,6 +28,10 @@ class Main extends Sprite
 	public static var base:Main;
         public static var hitbox:HitboxWrapper;
 
+        static final videoFiles:Array<String> = [
+		"",
+	];
+
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
 	public static function main():Void
@@ -80,6 +84,17 @@ class Main extends Sprite
 		}
 
                 Generic.mode = INTERNAL;
+
+                if (!FileSystem.exists(Generic.returnPath(ROOTDATA) + 'assets')) {
+			FileSystem.createDirectory(Generic.returnPath(ROOTDATA) + 'assets');
+		}
+		if (!FileSystem.exists(Generic.returnPath(ROOTDATA) + 'assets/videos')) {
+			FileSystem.createDirectory(Generic.returnPath(ROOTDATA) + 'assets/videos');
+		}
+
+                for (vid in videoFiles) {
+			Generic.copyContent(Paths._video(vid), Paths._video(vid), ROOTDATA);
+		}
 
 		#if !debug
 		initialState = TitleState;
