@@ -36,11 +36,11 @@ class Generic {
 	/**
 	* returns some paths depending on current 'mode' variable or you can force it to any mode by typing it into ()
 	*/
-	public static function returnPath(m:Modes = ROOTDATA):String {
+	public static function returnPath(m:Modes = null):String {
 		#if android
-		if (m == ROOTDATA && mode != ROOTDATA) { // the most stupid checking i made
-			m = mode;
-		}
+                if (m == null) {
+		        m = mode;
+                }
 		switch (m) {
 			case ROOTDATA:
 				path = lime.system.System.applicationStorageDirectory;
