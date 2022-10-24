@@ -159,7 +159,7 @@ class HitboxWrapper extends Sprite {
 
 	private function moveTouchHandle(event:TouchEvent):Void {
 		for (i in ha) {
-			if (i.isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width()) && i.lastOut != 1) {
+			if (isinRange(event.stageX, i.get_x(), i.get_x() + i.get_width()) && i.lastOut != 1) {
 				i.justPressedScreen = true;
 				i.pressedScreen = true;
 				i.justReleased = false;
@@ -168,5 +168,12 @@ class HitboxWrapper extends Sprite {
 				i.overlaps = true;
 			}
 		}
+	}
+
+        private function isinRange(pos:Float, start:Float, end:Float) {
+		if (pos >= start && pos <= end) {
+			return true;
+		}
+		return false;
 	}
 }
