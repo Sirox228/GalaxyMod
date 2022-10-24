@@ -247,11 +247,13 @@ class ResultScreen extends FlxSpriteGroup
 			{
 				wrongtxt.alpha += 0.05;
 			}
-			if ((controls.ACCEPT || controls.BACK) && !ended)
-			{
-				end();
-				ended = true;
-			}
+                        for (touch in FlxG.touches.list) {
+			    if ((controls.ACCEPT || controls.BACK || touch.justPressed) && !ended)
+			    {
+			        end();
+			        ended = true;
+			    }
+                        }
 		}
 
 		super.update(elapsed);
