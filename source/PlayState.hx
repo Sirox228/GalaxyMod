@@ -1540,6 +1540,8 @@ class PlayState extends MusicBeatState
 				startTimer.active = false;
 		}
 
+                Main.hitbox.visible = false;
+
 		super.openSubState(SubState);
 	}
 
@@ -1567,6 +1569,8 @@ class PlayState extends MusicBeatState
 			}
 			#end
 		}
+
+                Main.hitbox.visible = true;
 
 		super.closeSubState();
 	}
