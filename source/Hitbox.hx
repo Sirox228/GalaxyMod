@@ -155,17 +155,14 @@ class HitboxWrapper extends Sprite {
 		addChild(hitboxRight);
 	}
 	
-	private var offsets:Array<Int> = [0, 310, 620, 930];
-	private var widths:Array<Int> = [310, 310, 310, 315];
-	
 	private function handleTouch(event:Event) {
 		for (touch in flixel.FlxG.touches.list) {
-			for (h in 0...ha.length) {
-				if (touch.x > offsets[h] && touch.x < offsets[h] + widths[h]) {
-					ha[h].pressed = touch.pressed;
-					ha[h].justPressed = touch.justPressed;
-					ha[h].justReleased = touch.justReleased;
-					ha[h].released = touch.released;
+			for (h in ha) {
+				if (touch.x > h.get_x() && touch.x < h.get_x() + h.get_width()) {
+					h.pressed = touch.pressed;
+					h.justPressed = touch.justPressed;
+					h.justReleased = touch.justReleased;
+					h.released = touch.released;
 				}
 			}
 		}
