@@ -272,6 +272,10 @@ class StoryMenuState extends MusicBeatState
 		trace("Line 165");
 
 		super.create();
+
+                #if android
+                addVirtualPad(UP_DOWN, STORY);
+                #end
 	}
 
 	override function update(elapsed:Float)
@@ -303,11 +307,7 @@ class StoryMenuState extends MusicBeatState
 				else
 					leftArrow.animation.play('idle');
 
-				if (FlxG.mouse.screenX > rightArrow.x
-					&& FlxG.mouse.screenX < rightArrow.x + rightArrow.width
-					&& FlxG.mouse.screenY > rightArrow.y
-					&& FlxG.mouse.screenY < rightArrow.y + rightArrow.height
-					&& MusicBeatState.mouseA)
+				if (FlxG.mouse.overlaps(rightArrow) && FlxG.mouse.justPressed)
 				{
 					rightArrow.animation.play('press');
 					others = true;
@@ -315,11 +315,7 @@ class StoryMenuState extends MusicBeatState
 						changeDifficulty(1);
 				}
 
-				if (FlxG.mouse.screenX > leftArrow.x
-					&& FlxG.mouse.screenX < leftArrow.x + leftArrow.width
-					&& FlxG.mouse.screenY > leftArrow.y
-					&& FlxG.mouse.screenY < leftArrow.y + leftArrow.height
-					&& MusicBeatState.mouseA)
+				if (FlxG.mouse.overlaps(leftArrow) && FlxG.mouse.justPressed)
 				{
 					leftArrow.animation.play('press');
 					others = true;
@@ -333,7 +329,7 @@ class StoryMenuState extends MusicBeatState
 					changeDifficulty(-1);
 			}
 
-			if (controls.ACCEPT || (!others && FlxG.mouse.justPressed))
+			if (controls.ACCEPT)
 			{
 				selectWeek();
 			}
