@@ -36,11 +36,9 @@ class Generic {
 	/**
 	* returns some paths depending on current 'mode' variable or you can force it to any mode by typing it into ()
 	*/
-	public static function returnPath(m:Modes = null):String {
+	public static function returnPath():String {
 		#if android
-                if (m == null) {
-		        m = mode;
-                }
+                var m = mode;
 		switch (m) {
 			case ROOTDATA:
 				path = lime.system.System.applicationStorageDirectory;
@@ -165,10 +163,10 @@ class Generic {
 		return Std.isOfType(val1, val2);
 	}
 	
-	public static function copyContent(copyPath:String, savePath:String, m:Modes = null)
+	public static function copyContent(copyPath:String, savePath:String)
 	{
-			if (!FileSystem.exists(returnPath(m) + savePath)/* && Assets.exists(copyPath)*/) {
-				File.saveBytes(returnPath(m) + savePath, Assets.getBytes('default:' + copyPath));
+			if (!FileSystem.exists(returnPath() + savePath)/* && Assets.exists(copyPath)*/) {
+				File.saveBytes(returnPath() + savePath, Assets.getBytes('default:' + copyPath));
 			}
 	}
 }
