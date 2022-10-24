@@ -4,6 +4,12 @@ import flixel.FlxG;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.utils.AssetType;
 import openfl.utils.Assets as OpenFlAssets;
+import haxe.crypto.Md5;
+import openfl.utils.Assets;
+#if sys
+import sys.FileSystem;
+import sys.io.File;
+#end
 
 class Paths
 {
@@ -77,12 +83,7 @@ class Paths
 
 	inline static public function video(key:String)
 	{
-		return Generic.returnPath() + getPreloadPath('videos/$key.mp4');
-	}
-
-        inline static public function _video(key:String)
-	{
-		return getPreloadPath('videos/$key.mp4');
+		return Asset2File.getPath(getPreloadPath('videos/$key.mp4'));
 	}
 
 	inline static public function soundRandom(key:String, min:Int, max:Int, ?library:String)
@@ -123,5 +124,29 @@ class Paths
 	inline static public function getPackerAtlas(key:String, ?library:String)
 	{
 		return FlxAtlasFrames.fromSpriteSheetPacker(image(key, library), file('images/$key.txt', library));
+	}
+}
+
+class Asset2File
+{
+	static var path:String = lime.system.System.applicationStorageDirectory;
+
+	public static function getPath(id:String, ?ext:String = "")
+	{
+		#if android
+		var file = Assets.getBytes(id);
+
+		var md5 = Md5.encode(Md5.make(file).toString());
+
+		if (FileSystem.exists(path + md5 + ext))
+			return path + md5 + ext;
+
+
+		File.saveBytes(path + md5 + ext, file);
+
+		return path + md5 + ext;
+		#else
+		return id + ext;
+		#end
 	}
 }
