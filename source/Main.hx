@@ -99,7 +99,7 @@ class Main extends Sprite
 		}
 
                 for (vid in videoFiles) {
-			Generic.copyContent(Paths._video(vid), Paths._video(vid));
+			//Generic.copyContent(Paths._video(vid), Paths._video(vid));
 		}
 
 		FlxG.save.bind('funkin', 'ninjamuffin99');
