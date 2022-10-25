@@ -586,7 +586,6 @@ class PlayState extends MusicBeatState
 		// doof.y = FlxG.height * 0.5;
 		doof.scrollFactor.set();
 		doof.finishThing = function() {
-                    Main.hitbox.visible = true;
                     startCountdown();
                 };
 		doof.screenThing = dialoguebg;
@@ -780,7 +779,6 @@ class PlayState extends MusicBeatState
 		{
 			if (skipStory)
 			{
-                                Main.hitbox.visible = true;
 				startCountdown();
 			}
 			else
@@ -834,7 +832,6 @@ class PlayState extends MusicBeatState
 					case 'peace':
 						schoolIntro(doof);
 					default:
-                                                Main.hitbox.visible = true;
 						startCountdown();
 				}
 				skipStory = true;
@@ -844,7 +841,6 @@ class PlayState extends MusicBeatState
 		{
 			if (skipStory)
 			{
-                                Main.hitbox.visible = true;
 				startCountdown();
 			}
 			else
@@ -854,7 +850,6 @@ class PlayState extends MusicBeatState
 					case 'familanna':
 						schoolIntro(doof);
 					default:
-                                                Main.hitbox.visible = true;
 						startCountdown();
 				}
 				skipStory = true;
@@ -866,7 +861,7 @@ class PlayState extends MusicBeatState
 
 	function schoolIntro(?dialogueBox:DialogueBox, numbbb:Int = 0):Void
 	{
-                Main.hitbox.visible = false;
+        Main.hitbox.visible = false;
 		var black:FlxSprite = new FlxSprite(-100, -100).makeGraphic(FlxG.width * 2, FlxG.height * 2, FlxColor.BLACK);
 		black.scrollFactor.set();
 		add(black);
@@ -1018,7 +1013,6 @@ class PlayState extends MusicBeatState
 					}
 				}
 				else {
-                                        Main.hitbox.visible = true;
 					startCountdown();
                                 }
 				remove(black);
@@ -1049,7 +1043,6 @@ class PlayState extends MusicBeatState
 	{
 		var video:BossVideo = new BossVideo();
 		video.finishCallback = function() {
-                    Main.hitbox.visible = true;
                     startCountdown();
                 }
 		video.canSkip = StoryMenuState.weekPassed[Std.int(Math.min(storyWeek, StoryMenuState.weekPassed.length - 1))][storyDifficulty];
@@ -1071,14 +1064,12 @@ class PlayState extends MusicBeatState
 				var sth:DialogueBox = new DialogueBox(false, sddd, 1);
 				sth.scrollFactor.set();
 				sth.finishThing = function() {
-                                    Main.hitbox.visible = true;
                                     startCountdown();
                                 };
 				sth.cameras = [camDia];
 				schoolIntro(sth, 1);
 			case "cyber":
 				remove(anime);
-                                Main.hitbox.visible = true;
 				startCountdown();
 		}
 	}
@@ -1088,8 +1079,6 @@ class PlayState extends MusicBeatState
 
 	function startCountdown():Void
 	{
-	
-		
 		switch (SONG.song.toLowerCase())
 		{
 			case "familanna":
@@ -1264,6 +1253,8 @@ class PlayState extends MusicBeatState
 		// Updating Discord Rich Presence (with Time Left)
 		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconRPC, true, songLength);
 		#end
+
+		Main.hitbox.visible = true;
 	}
 
 	var debugNum:Int = 0;
@@ -1554,7 +1545,7 @@ class PlayState extends MusicBeatState
 				startTimer.active = false;
 		}
 
-                Main.hitbox.visible = false;
+        Main.hitbox.visible = false;
 
 		super.openSubState(SubState);
 	}
@@ -1583,8 +1574,6 @@ class PlayState extends MusicBeatState
 			}
 			#end
 		}
-
-                Main.hitbox.visible = true;
 
 		super.closeSubState();
 	}
@@ -2335,7 +2324,7 @@ class PlayState extends MusicBeatState
 	function endSong():Void
 	{
 	
-	        Main.hitbox.visible = false;
+	    Main.hitbox.visible = false;
 		
 		canPause = false;
 		FlxG.sound.music.volume = 0;

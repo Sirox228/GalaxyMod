@@ -66,23 +66,17 @@ class FreeplayState extends MusicBeatState
 		if (StoryMenuState.weekPassed[1].contains(true) || isDebug)
 		{
 			addSong("Kastimagina", 1, 'kastimagina', "Allen98637");
-			#if (desktop || web)
 			addSong('Familanna', 1, 'kastimagina', "Allen98637");
-			#end
 		}
 		addWeek(['Cona', 'Underworld'], 2, ['kalisa'], ["Allen98637"]);
 		if (StoryMenuState.weekPassed[2].contains(true) || isDebug)
 		{
-			#if desktop
 			addSong('Cyber', 2, 'kalisa', "Allen98637");
-			#end
 		}
 		addWeek(['Newton', 'Destiny'], 3, ['unknown'], ["Allen98637"]);
 		if (StoryMenuState.weekPassed[3].contains(true) || isDebug)
 		{
-			#if (desktop || web)
 			addSong('Peace', 3, 'unknown', "Allen98637");
-			#end
 		}
 		var tasks:Int = songs.length;
 		var task:Int = 0;

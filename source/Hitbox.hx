@@ -80,6 +80,7 @@ class Hitbox extends Sprite {
 		}
 		if (justReleased) {
 			justReleased = false;
+			released = true;
 		}
 	}
 
@@ -153,12 +154,14 @@ class HitboxWrapper extends Sprite {
 		addChild(hitboxDown);
 		addChild(hitboxUp);
 		addChild(hitboxRight);
+		blendMode = BlendMode.DIFFERENCE;
 	}
 	
 	private function handleTouch(event:Event) {
 		for (touch in flixel.FlxG.touches.list) {
+			trace(touch.x);
 			for (h in ha) {
-				if (touch.x > h.get_x() && touch.x < h.get_x() + h.get_width()) {
+				if (touch.x > h.get_x() - 160 && touch.x < h.get_x() - 160 + h.get_width()) {
 					h.pressed = touch.pressed;
 					h.justPressed = touch.justPressed;
 					h.justReleased = touch.justReleased;

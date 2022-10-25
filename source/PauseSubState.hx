@@ -147,6 +147,7 @@ class PauseSubState extends MusicBeatSubstate
 				case "Resume":
 					if (PlayState.SONG.song.toLowerCase() == "cyber" && PlayState.storyDifficulty != 0)
 						PlayWindow.reset();
+					Main.hitbox.visible = true;
 					close();
 				case "Restart Song":
 					LoadingState.loadAndSwitchState(new PlayState(), true);

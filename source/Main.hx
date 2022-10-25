@@ -112,7 +112,11 @@ class Main extends Sprite
 			framerate = FlxG.save.data.FPS;
 		}
 
-		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
+		var game = new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen);
+
+		game.blendMode = BlendMode.DIFFERENCE;
+
+		addChild(game);
 
 		
 		fps = new FPSCounter(10, 3, 0xFFFFFF);
